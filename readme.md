@@ -15,3 +15,15 @@ Windows registry.
 
 To remove the plugin, call `uninstall.bat`.
 
+# Modify
+
+To change the keyboard shortcut or the way vim (or any editor of your choice)
+is opened, edit the file
+
+	OpenInVim.dpr
+
+At the top of this file you find the code that you need to edit.
+
+If you want to remove the Vim part altogether, you should find and replace
+all instances of "OpenInVim" and "Open in Vim" throughout all the files.
+

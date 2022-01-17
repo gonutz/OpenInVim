@@ -8,6 +8,22 @@ uses
   VCL.Menus,
   ToolsAPI;
 
+// To change the details of this plugin, modify these constants (PluginName and
+// KeyboardShortcut) and the function OpenFileInVim which is called when the shortcut is
+// pressed in the IDE.
+
+ResourceString
+  PluginName = 'Open in Vim';
+  KeyboardShortcut = 'Ctrl+Shift+V';
+
+procedure OpenFileInVim(FilePath: string; Line, Column: Integer);
+begin
+  ShellExecute(0, '', 'vim', PWideChar(Format('"+call cursor(%d,%d)" "%s"',
+    [Line, Column, FilePath])), '', SW_SHOWNORMAL);
+end;
+
+// The rest of this file contains the details to make a minimal Rad Studio plugin.
+
 {$R *.res}
 
 type
@@ -44,15 +60,14 @@ begin
   begin
     Source := SourceEditor(MS.CurrentModule);
     CursorPos := Source.EditViews[0].CursorPos;
-    ShellExecute(0, '', 'vim', PWideChar(Format('"+call cursor(%d,%d)" "%s"',
-      [CursorPos.Line, CursorPos.Col, Source.FileName])), '', SW_SHOWNORMAL);
+    OpenFileInVim(Source.FileName, CursorPos.Line, CursorPos.Col);
   end;
   BindingResult := krHandled;
 end;
 
 procedure KeyboardBindings.BindKeyboard(const BindingServices: IOTAKeyBindingServices);
 begin
-  BindingServices.AddKeyBinding([TextToShortCut('Ctrl+Shift+V')], OpenInVim, nil);
+  BindingServices.AddKeyBinding([TextToShortCut(KeyboardShortcut)], OpenInVim, nil);
 end;
 
 function KeyboardBindings.GetBindingType: TBindingType;
@@ -60,17 +75,14 @@ begin
   Result := btPartial;
 end;
 
-ResourceString
-  OpenInVimName = 'Open in Vim';
-
 function KeyboardBindings.GetDisplayName: string;
 begin
-  Result := OpenInVimName;
+  Result := PluginName;
 end;
 
 function KeyboardBindings.GetName: string;
 begin
-  Result := OpenInVimName;
+  Result := PluginName;
 end;
 
 type
@@ -111,17 +123,13 @@ begin
 end;
 
 function Wizard.GetIDString: string;
-ResourceString
-  ID = 'Open in Vim ID';
 begin
-  Result := ID;
+  Result := PluginName;
 end;
 
 function Wizard.GetName: string;
-ResourceString
-  Name = 'Open in Vim ID';
 begin
-  Result := Name;
+  Result := PluginName;
 end;
 
 function Wizard.GetState: TWizardState;
@@ -147,5 +155,3 @@ Exports InitWizard Name WizardEntryPoint;
 begin
 
 end.
-
-
