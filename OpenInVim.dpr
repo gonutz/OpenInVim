@@ -1,5 +1,5 @@
 library OpenInVim;
-
+
 uses
   System.SysUtils,
   System.Classes,
@@ -16,6 +16,7 @@ ResourceString
   PluginName = 'Open in Vim';
   KeyboardShortcut = 'Ctrl+Shift+V';
 
+// Line and Column start at 1, not at 0.
 procedure OpenFileInVim(FilePath: string; Line, Column: Integer);
 begin
   ShellExecute(0, '', 'vim', PWideChar(Format('"+call cursor(%d,%d)" "%s"',
@@ -155,3 +156,4 @@ Exports InitWizard Name WizardEntryPoint;
 begin
 
 end.
+
