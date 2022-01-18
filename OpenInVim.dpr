@@ -14,7 +14,7 @@ uses
 
 ResourceString
   PluginName = 'Open in Vim';
-  KeyboardShortcut = 'Ctrl+Shift+V';
+  KeyboardShortcut = 'Ctrl+Shift+O';
 
 // Line and Column start at 1, not at 0.
 procedure OpenFileInVim(FilePath: string; Line, Column: Integer);

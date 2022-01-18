@@ -2,7 +2,7 @@
 
 This is a Delphi Rad Studio plugin that adds the keyboard shortcut
 
-	Ctrl+Shift+V
+	Ctrl+Shift+O
 
 to the IDE to open the current file at the current location in vim.
 It expects `vim.exe` to be on the path.
