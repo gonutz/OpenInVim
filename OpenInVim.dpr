@@ -19,8 +19,9 @@ ResourceString
 // Line and Column start at 1, not at 0.
 procedure OpenFileInVim(FilePath: string; Line, Column: Integer);
 begin
-  ShellExecute(0, '', 'vim', PWideChar(Format('"+call cursor(%d,%d)" "%s"',
-    [Line, Column, FilePath])), '', SW_SHOWNORMAL);
+  ShellExecute(0, '', 'vim', PWideChar(Format(
+    '"+call cursor(%d,%d)" -c ":normal zz" "%s"', [Line, Column, FilePath])),
+	'', SW_SHOWNORMAL);
 end;
 
 // The rest of this file contains the details to make a minimal Rad Studio plugin.
