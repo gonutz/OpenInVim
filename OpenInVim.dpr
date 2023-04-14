@@ -60,6 +60,7 @@ var
 begin
   if Supports(BorlandIDEServices, IOTAModuleServices, MS) then
   begin
+    MS.CurrentModule.Save(false, true);
     Source := SourceEditor(MS.CurrentModule);
     CursorPos := Source.EditViews[0].CursorPos;
     OpenFileInVim(Source.FileName, CursorPos.Line, CursorPos.Col);
