@@ -20,7 +20,7 @@ ResourceString
 procedure OpenFileInVim(FilePath: string; Line, Column: Integer);
 begin
   ShellExecute(0, '', 'vim', PWideChar(Format(
-    '"+call cursor(%d,%d)" -c ":normal zz" "%s"', [Line, Column, FilePath])),
+    '"+call cursor(%d,%d)" "+:normal zz" "%s"', [Line, Column, FilePath])),
 	'', SW_SHOWNORMAL);
 end;
 
@@ -158,4 +158,4 @@ Exports InitWizard Name WizardEntryPoint;
 begin
 
 end.
-
+
